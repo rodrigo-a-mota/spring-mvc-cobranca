@@ -68,6 +68,10 @@ public class Titulo {
         this.status = status;
     }
 
+    public boolean isPendente() {
+        return StatusTitulo.PENDENTE.equals(this.status);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
