@@ -1,6 +1,7 @@
 package com.algaworks.spring_mvc_cobranca.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.NumberFormat;
 
@@ -15,12 +16,18 @@ public class Titulo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long codigo;
 
+    @NotEmpty(message = "Descrição é obrigatória")
+    @Size(max = 60, message = "A descrição não pode conter mais de 60 caracteres")
     private String descricao;
 
+    @NotNull(message = "Data de vencimento é obrigatória")
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     @Temporal(TemporalType.DATE)
     private Date dataVencimento;
 
+    @NotNull(message = "Valor é obrigatório")
+    @DecimalMax(value = "9999999.99", message = "Valor não pode ser  maior que 9.999.999,99")
+    @DecimalMin(value = "0.01", message = "Valor não pode ser menor que 0,01")
     @NumberFormat(pattern = "#,##0.00")
     private BigDecimal valor;
 
